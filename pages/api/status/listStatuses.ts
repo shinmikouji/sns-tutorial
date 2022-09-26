@@ -1,20 +1,10 @@
 import { NextApiHandler } from 'next'
 
-const handler: NextApiHandler<Response> = (req, res): void => {
-  const status = statuses.find((status) => status.id === req.query.id)
-  status
-    ? res.status(200).json(status)
-    : res.status(404).json({ message: 'not found' })
-}
+const handler: NextApiHandler<Response> = (req, res): void =>
+  res.status(200).json(statuses)
 
 // レスポンス型
-type Response = Failure | Success
-
-// 失敗した場合のレスポンス型
-type Failure = { message: string }
-
-// 成功した場合のレスポンス型
-type Success = Status
+type Response = Status[]
 type Status = {
   id: string
   body: string
